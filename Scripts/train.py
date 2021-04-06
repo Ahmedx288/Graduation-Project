@@ -1,5 +1,6 @@
 #---------------- Prepare the command line -----------------------------
 import argparse
+import os
 from os.path import isdir
 
 def get_input_args():
@@ -7,7 +8,7 @@ def get_input_args():
     parser = argparse.ArgumentParser()
     
     
-    parser.add_argument('--data_dir', type = str, default = 'Face Mask Dataset', 
+    parser.add_argument('--data_dir', type = str, default = '../Face Mask Dataset', 
                     help = 'Define a directory which contains the data.')
     
     parser.add_argument('--save_dir', type = str, default = 'saved_models/checkpoint.pth', 
@@ -44,7 +45,7 @@ print(f"\nPrepare data from the folder '{args.data_dir}'")
 
 data_dir = args.data_dir
 train_dir = data_dir + '/Train'
-valid_dir = data_dir + '/Valid'
+valid_dir = data_dir + '/Validation'
 test_dir = data_dir + '/Test'
 
 # Define your transforms for the training, validation, and testing sets
@@ -97,16 +98,18 @@ print('num_of_test_withoutmask {}/'.format(len(os.listdir(test_dir+'/WithoutMask
 print('num_of_val_withoutmask {}/'.format(len(os.listdir(valid_dir+'/WithoutMask'))),'num_of_val_withmask {}'.format(len(os.listdir(valid_dir+'/WithMask'))))
 
 #---------------- Build the model to be trained with the help of a pretrained architecture -------------------------------------------
-if args.arch == 'vgg16':
-    input_units = 25088
-elif args.arch == 'densenet121':
-    input_units = 1024
-else:
-    print("Only supported models for now are vgg16 and densenet121.")
-    exit()
+#if args.arch == 'vgg16':
+#    input_units = 25088
+#elif args.arch == 'densenet121':
+#    input_units = 1024
+#else:
+#    print("Only supported models for now are vgg16 and densenet121.")
+#    exit()
 
-model = getattr(models, args.arch)(pretrained=True)
-print(f"\nThe model {args.arch} is being created.....")
+#model = getattr(models, args.arch)(pretrained=True)
+input_units = 1024
+model = models.densenet121(pretrained=True)
+print(f"\nThe model densenet121 is being created.....")
 
 # Freeze
 for param in model.parameters():
@@ -237,7 +240,7 @@ model.class_to_idx = train_dataset.class_to_idx
 model.class_to_idx
 
 checkpoint = {
-    "model_arch": args.arch,
+    #"model_arch": args.arch,
     "classifier": model.classifier,
     "model_state": model.state_dict(),
     "optimizer_state": optimizer.state_dict(),

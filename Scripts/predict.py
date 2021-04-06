@@ -32,13 +32,10 @@ import json
 
 #---------------- Load Function ------------------------------------------
 def load_checkpoint(filepath):
-    checkpoint = torch.load(filepath)
+    checkpoint = torch.load(filepath,  map_location=torch.device('cpu'))
     
     # Download pretrained model
-    if checkpoint['model_arch'] == 'densenet121':
-        model = models.densenet121(pretrained=True)
-    elif checkpoint['model_arch'] == 'vgg16':
-        model = models.vgg16(pretrained=True)
+    model = models.densenet121(pretrained=True)
         
     # Freeze
     for param in model.parameters():
@@ -113,7 +110,7 @@ def predict(image_path, model, topk=2):
         model.to(available_device)
         image_feed.to(available_device)
         
-        if device == 'cpu':
+        if available_device == 'cpu':
             logits = model.forward(image_feed.type(torch.FloatTensor))
         else:
             logits = model.forward(image_feed.type(torch.cuda.FloatTensor))
@@ -134,7 +131,7 @@ def predict(image_path, model, topk=2):
 #----------------------------------------------------------------------------------------------------
 
 args = get_input_args()
-model = load_checkpoint(args.model_path)
+model, optimizer = load_checkpoint(args.model_path)
 image_path =  args.image_path
 img = process_image(image_path)
 probs, classes = predict(image_path, model, args.top_k)
