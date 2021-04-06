@@ -9,8 +9,8 @@ def get_input_args():
     parser.add_argument('--model_path', type = str, default = 'saved_models/checkpoint.pth', 
                     help = 'Specifiy a file that conatins the model state. (Default = checkpoint.pth)')
     
-    parser.add_argument('--image_path', type = str, default = 'Face Mask Dataset/Test/WithMask/1175.png', 
-                    help = 'Specify an Image file to be used in the prediction process. (Default = Face Mask Dataset/Test/WithMask/1175.png)')
+    parser.add_argument('--image_path', type = str, default = '../Face Mask Dataset/Test/WithMask/1175.png', 
+                    help = 'Specify an Image file to be used in the prediction process. (Default = ../Face Mask Dataset/Test/WithMask/1175.png)')
     
     parser.add_argument('--top_k', type = int, default = 2, 
                     help = 'Specify the number of top K likely classes to be displayed. (Default = 2)')
@@ -110,8 +110,8 @@ def predict(image_path, model, topk=2):
             print("\nStart predicting on the GPU.")
     
     with torch.no_grad():  
-        model.to(device)
-        image_feed.to(device)
+        model.to(available_device)
+        image_feed.to(available_device)
         
         if device == 'cpu':
             logits = model.forward(image_feed.type(torch.FloatTensor))
