@@ -28,7 +28,9 @@ def check_arguments_errors(args):
 
 #---------------- YOLO_BOUNDING_BOX CONVERTER --------------------------
 def yolo_bounding_box(image_size, bounding_box):
-    """Takes as input:  (width, height) of an image
+    """Convert xml annotation to darknet format coordinates
+        
+       Takes as input:  (width, height) of an image
                         (xmin, ymin, xmax, ymax) of the bounding box
        and returns (x, y, w, h) of the bounding box in yolo format.
     """
@@ -98,7 +100,7 @@ def xml_to_txt(input_path, output_path):
             bounding_box_yolo = yolo_bounding_box(image_size, bounding_box)                     
             
             # Store the objects information in the list txt_list to be written in a .txt file later.
-            txt_list.append(class_mapping.get(object_class) + " " + " ".join([str(l) for l in bounding_box_yolo]) + "\n")
+            txt_list.append(class_mapping.get(object_class) + " " + " ".join([str(cord) for cord in bounding_box_yolo]) + "\n")
             # i.e. ['1 0.18359375 0.337431693989071 0.05859375 0.10109289617486339\n']
             #        <class_name> <x_center> <y_center> <width> <height>
             #        1(Class)     followed by the bounding box values in yolo format
