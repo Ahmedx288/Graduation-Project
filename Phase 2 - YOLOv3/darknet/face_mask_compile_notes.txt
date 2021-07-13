@@ -1,0 +1,7 @@
+// Install Chocolatey
+
+// Install cygwin
+choco install make --source=cygwin
+
+// add variable to path
+"C:\tools\cygwin\bin"
