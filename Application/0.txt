@@ -1,0 +1,5 @@
+python Images.py --image Images/2.png
+
+python Videos.py --input Videos/Test.mp4 -- output Videos/Result.mp4
+
+python Camera.py
