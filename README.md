@@ -1,4 +1,5 @@
 
+
 ## Face-mask Detection in Real-time
 This repository is for my graduation project.
 
@@ -47,6 +48,24 @@ Feel free to use the raw python scripts to train or inference:
 
 ![Scripts instructions](https://user-images.githubusercontent.com/34996582/207873019-e1060648-7cd6-4140-b17a-79af56a5bead.png)
 
-Note: For more info about this phase of the project feel free to read the SRS Document. [Link](https://github.com/Ahmedx288/Graduation-Project/blob/main/Documents/SRS%20Document.pdf).
+**Note:** For more info about this phase of the project feel free to read the SRS Document. [Link](https://github.com/Ahmedx288/Graduation-Project/blob/main/Documents/SRS%20Document.pdf).
 
 ___
+## Phase 2 - Multi-Object-Detection
+![Static Inference Example](https://user-images.githubusercontent.com/34996582/207887973-d40c75ef-419a-4e2a-acec-4d4505c9199f.png)
+
+
+Used Dataset: [Face Mask Detection [3 Classes] ](https://www.kaggle.com/datasets/andrewmvd/face-mask-detection)
+This dataset consists of 853 images belonging to three classes (With Mask / Without Mask / Wearing Wrong) 
+
+Complete Project (Notebook): [YOLOv3_Face_mask_Detection.ipynb](https://colab.research.google.com/drive/1RZTwNA5_qZv5LQ2Ngtbn342PPcc9xZIP?usp=sharing)
+
+Feel free to use our simple python OpenCV Application to infer images, videos, and real-time streaming through a camera:
+
+1- Inference Images (multi objects detection): [Images.py](https://github.com/Ahmedx288/Graduation-Project/blob/main/Application/Images.py "Images.py")
+
+2- Inference Videos (multi objects detection): [Videos.py](https://github.com/Ahmedx288/Graduation-Project/blob/main/Application/Videos.py "Videos.py")
+
+3- Online camera: [Camera.py](https://github.com/Ahmedx288/Graduation-Project/blob/main/Application/Camera.py "Camera.py")
+
+**Note:** For more info about this phase of the project feel free to read the project Documentation. [Link](https://github.com/Ahmedx288/Graduation-Project/blob/main/Documents/Documentation.pdf "Documentation.pdf").
